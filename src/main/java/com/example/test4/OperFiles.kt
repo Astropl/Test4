@@ -19,6 +19,8 @@ var plikMiesiacKatalog = File("")
 var listaZdni = mutableListOf<String>()
 var listaZtygodnia = mutableListOf<String>()
 var listaZMiesiaca = mutableListOf<String>()
+var listaSpalonychWszystkichTemp = mutableListOf<String>()
+var listaSpalonychWszystkich = mutableListOf<String>()
 var ustawienia = Ustawienia()
 var first = First()
 
@@ -51,6 +53,32 @@ class OperFiles : AppCompatActivity() {
             e.printStackTrace()
         }
         //loguj("stworzPlikZeSpalona: End")
+    }
+
+    fun pobierzSpalonoWszystkie(spalonoWszystkie1: Int): Int {
+        var spalonoWszystkie = 32
+
+        //wczytać date pierwszego użycia.
+        //zrobic petle i po wszystkich datach sie przeleciec i zczytac dane do listy
+        // odczytac wielkosc listy
+        //odczytac osostnią dane w której jest info ile spaliło w dzien
+        //dodac do listy wszytskie
+        //zsumowac wszytskie dane z listy
+        //zrzucic do statystyki
+var dataPierwszegoWpisu =0
+        listaSpalonychWszystkichTemp.clear()
+        listaSpalonychWszystkich.clear()
+
+        try {//okreslic sciezke dostepu, plik pierwszy
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+
+       var spalonoWszystkie1 = spalonoWszystkie
+
+        return spalonoWszystkie1
     }
 
     fun pobierzSpalone(spalone: String): String {
@@ -118,13 +146,10 @@ class OperFiles : AppCompatActivity() {
         loguj("aaaaaaaPokaz Dzien w ,miesiacu i roku: $rokWMiesiacu1 , $miesiacWMiesiacu1, $dzienWMiesiacu1")
         //stworzyc sciezke i nazwe pliku
         //wpFileUstawieniaDzienny = File("/data/data/com.example.test4/files/daty")
-        if (miesiacWMiesiacu1<10)
-        {
+        if (miesiacWMiesiacu1 < 10) {
             miesiacWMiesiacu2 = "0" + miesiacWMiesiacu1
-        }
-        else
-        {
-            miesiacWMiesiacu2 =  miesiacWMiesiacu1.toString()
+        } else {
+            miesiacWMiesiacu2 = miesiacWMiesiacu1.toString()
         }
         plikMiesiac = rokWMiesiacu1.toString() + "-" + miesiacWMiesiacu2.toString() + ".txt"
         plikMiesiacKatalog = File(wpFileUstawieniaDzienny, plikMiesiac)
@@ -138,9 +163,7 @@ class OperFiles : AppCompatActivity() {
                 val fos = FileOutputStream(plikMiesiacKatalog)
                 loguj("5. stworzPlikMiesieczny: tworze plik")
                 wypelnijPlikZMiesiac()
-            }
-            else
-            {
+            } else {
                 loguj("5. stworzPlikMiesieczny: plik jest ")
             }
 
@@ -149,50 +172,15 @@ class OperFiles : AppCompatActivity() {
         }
 
     }
-fun zakonczMiesiac(spaloneMiesiac2: Int):Int
-{
-//z;liczyc ile w miesiacu  i zapisac w plikzmiasiaca
-    loguj(" ZakonczMiesiac: $spaloneMiesiac2")
-    var dzienWMiesiacu = 0
-    var dzienWMiesiacu1 = 0
-    var miesiacWMiesiacu = 0
-    var miesiacWMiesiacu1 = 0
-    var miesiacWMiesiacu2=""
-    var rokWMiesiacu = 0
-    var rokWMiesiacu1 = 0
-    dzienWMiesiacu1 = operDate.pokazDzienInt(dzienWMiesiacu)
-    miesiacWMiesiacu1 = operDate.pokazMiesiacInt(miesiacWMiesiacu)
-    rokWMiesiacu1 = operDate.pokazRokInt(rokWMiesiacu)
-    loguj("wypelnij plik z miesiacem: start")
-    //TODO:dodac zero do miesiaca ponizej 10
-    if (miesiacWMiesiacu1<10)
-    {
-        miesiacWMiesiacu2 = "0" + miesiacWMiesiacu1
-    }
-    else
-    {
-        miesiacWMiesiacu2 =  miesiacWMiesiacu1.toString()
-    }
-    plikMiesiac = rokWMiesiacu1.toString() + "-" + miesiacWMiesiacu2 + ".txt"
-    plikMiesiacKatalog = File(wpFileUstawieniaDzienny, plikMiesiac)
-    try {
-        if(plikMiesiacKatalog.exists())
-        {
-            plikMiesiacKatalog.writeText(spaloneMiesiac2.toString())
-        }
 
-    }catch (e: FileNotFoundException)
-    {
-        e.printStackTrace()
-    }
-    return 0
-}
-    fun wypelnijPlikZMiesiac() {
+    fun zakonczMiesiac(spaloneMiesiac2: Int): Int {
+//z;liczyc ile w miesiacu  i zapisac w plikzmiasiaca
+        loguj(" ZakonczMiesiac: $spaloneMiesiac2")
         var dzienWMiesiacu = 0
         var dzienWMiesiacu1 = 0
         var miesiacWMiesiacu = 0
         var miesiacWMiesiacu1 = 0
-        var miesiacWMiesiacu2=""
+        var miesiacWMiesiacu2 = ""
         var rokWMiesiacu = 0
         var rokWMiesiacu1 = 0
         dzienWMiesiacu1 = operDate.pokazDzienInt(dzienWMiesiacu)
@@ -200,24 +188,51 @@ fun zakonczMiesiac(spaloneMiesiac2: Int):Int
         rokWMiesiacu1 = operDate.pokazRokInt(rokWMiesiacu)
         loguj("wypelnij plik z miesiacem: start")
         //TODO:dodac zero do miesiaca ponizej 10
-        if (miesiacWMiesiacu1<10)
-        {
+        if (miesiacWMiesiacu1 < 10) {
             miesiacWMiesiacu2 = "0" + miesiacWMiesiacu1
+        } else {
+            miesiacWMiesiacu2 = miesiacWMiesiacu1.toString()
         }
-        else
-        {
-            miesiacWMiesiacu2 =  miesiacWMiesiacu1.toString()
+        plikMiesiac = rokWMiesiacu1.toString() + "-" + miesiacWMiesiacu2 + ".txt"
+        plikMiesiacKatalog = File(wpFileUstawieniaDzienny, plikMiesiac)
+        try {
+            if (plikMiesiacKatalog.exists()) {
+                plikMiesiacKatalog.writeText(spaloneMiesiac2.toString())
+            }
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+        return 0
+    }
+
+    fun wypelnijPlikZMiesiac() {
+        var dzienWMiesiacu = 0
+        var dzienWMiesiacu1 = 0
+        var miesiacWMiesiacu = 0
+        var miesiacWMiesiacu1 = 0
+        var miesiacWMiesiacu2 = ""
+        var rokWMiesiacu = 0
+        var rokWMiesiacu1 = 0
+        dzienWMiesiacu1 = operDate.pokazDzienInt(dzienWMiesiacu)
+        miesiacWMiesiacu1 = operDate.pokazMiesiacInt(miesiacWMiesiacu)
+        rokWMiesiacu1 = operDate.pokazRokInt(rokWMiesiacu)
+        loguj("wypelnij plik z miesiacem: start")
+        //TODO:dodac zero do miesiaca ponizej 10
+        if (miesiacWMiesiacu1 < 10) {
+            miesiacWMiesiacu2 = "0" + miesiacWMiesiacu1
+        } else {
+            miesiacWMiesiacu2 = miesiacWMiesiacu1.toString()
         }
         plikMiesiac = rokWMiesiacu1.toString() + "-" + miesiacWMiesiacu2 + ".txt"
         plikMiesiacKatalog = File(wpFileUstawieniaDzienny, plikMiesiac)
         loguj("wypelnij plik z miesiacem: Podaj sciezke $plikMiesiacKatalog")
         try {
-            if (plikMiesiacKatalog.exists())
-            {loguj("wypelnij plik z miesiacem: plik jest wypelnij zerem")
+            if (plikMiesiacKatalog.exists()) {
+                loguj("wypelnij plik z miesiacem: plik jest wypelnij zerem")
                 plikMiesiacKatalog.writeText("0")
             }
-        }catch (e: FileNotFoundException)
-        {
+        } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
         loguj("wypelnij plik z miesiacem: end")
@@ -586,6 +601,10 @@ fun zakonczMiesiac(spaloneMiesiac2: Int):Int
         //loguj("zapisSett: start")
         plikUstawienia.writeText("")
         //loguj("zapisSett: $cenaZaPaczke")
+
+        var dataFirstSett = "0"
+        dataFirstSett = operDate.pokazDate(dataFirstSett)
+        loguj("Data first to: $dataFirstSett")
         try {
             if (plikUstawienia.exists()) {
                 //loguj("zapisSett: Plik jest. Wypełniam")
@@ -598,6 +617,8 @@ fun zakonczMiesiac(spaloneMiesiac2: Int):Int
                 plikUstawienia.appendText("\n")
                 plikUstawienia.appendText(dlugoscFajki)
                 //loguj("zapisSett: Plik jest. Wypełniam $dlugoscFajki")
+                plikUstawienia.appendText("\n")
+                plikUstawienia.appendText(dataFirstSett)//zapisuje date pierwszego użycia
                 plikUstawienia.appendText("\n")
                 //plikUstawienia.
             } else {

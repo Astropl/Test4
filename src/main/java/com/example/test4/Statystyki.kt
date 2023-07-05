@@ -70,7 +70,8 @@ class Statystyki : AppCompatActivity() {
         var ileSpalonoDzisiaj = findViewById<TextView>(R.id.statystyki_txt_dzisiajInfo1)
         var ileSpalonoDzisiaj1 = (ileSpalonoDzisiaj.text)
         loguj("Iles spalono dzisiaj1 $ileSpalonoDzisiaj1")
-        var ileSpalonoDzisiaj2 = ileSpalonoDzisiaj1.toString().toDouble() //TODO: Zamienić na int nie .. na BigDecimal
+        var ileSpalonoDzisiaj2 =
+            ileSpalonoDzisiaj1.toString().toDouble() //TODO: Zamienić na int nie .. na BigDecimal
         var ileSpalonoDzisiajInt = ((ileSpalonoDzisiaj2 * 14.99) / 20) //TODO x 14 cena paczki
         ileSpalonoDzisiajInt = ((ileSpalonoDzisiajInt * 100.0).roundToInt() / 100.0)
         loguj("Iles spalono dzisiaj1 SUMA $ileSpalonoDzisiajInt") //Zaokrąlone do Doubla.
@@ -79,8 +80,8 @@ class Statystyki : AppCompatActivity() {
         var ileSpalonoTydzien1 = ileSpalonoTydzien.text
         loguj("Iles spalono w tygodniu $ileSpalonoTydzien1")
         var ileSpalonoTydzien2 = ileSpalonoTydzien1.toString().toDouble()
-        var ileSpaloTydzienInt = ((ileSpalonoTydzien2 *14.99) /20)
-        ileSpaloTydzienInt =((ileSpaloTydzienInt * 100.0).roundToInt() / 100.0)
+        var ileSpaloTydzienInt = ((ileSpalonoTydzien2 * 14.99) / 20)
+        ileSpaloTydzienInt = ((ileSpaloTydzienInt * 100.0).roundToInt() / 100.0)
         loguj("Iles spalono w tygodniu SUMA $ileSpaloTydzienInt")
 //MIESIAC//
         var ileSpalonoMiesiac = findViewById<TextView>(R.id.statystyki_txt_miesiacInfo1)
@@ -88,31 +89,27 @@ class Statystyki : AppCompatActivity() {
         loguj("Iles spalono w tygodniu $ileSpalonoMiesiac1")
         var ileSpalonoMiesiac2 =
             ileSpalonoMiesiac1.toString().toDouble()
-        var ileSpaloMiesiacInt = ((ileSpalonoMiesiac2 *14.99) /20)
-        ileSpaloMiesiacInt =((ileSpaloMiesiacInt* 100.0).roundToInt()/100.0)
+        var ileSpaloMiesiacInt = ((ileSpalonoMiesiac2 * 14.99) / 20)
+        ileSpaloMiesiacInt = ((ileSpaloMiesiacInt * 100.0).roundToInt() / 100.0)
         loguj("Iles spalono w Miesiac SUMA $ileSpaloMiesiacInt")
         //WSZYSTKIE// ileSpalonoMiesiacInt
         var ileSpalonoWszystkie = findViewById<TextView>(R.id.statystyki_txt_wszystkieInfo1)
         var ileSpalonoWszystkie1 = ileSpalonoWszystkie.text
 
+        loguj("Ileso1 spalono wszystkie $ileSpalonoWszystkie1")
+        var ileSpalonoWszystkie2 =
+            ileSpalonoWszystkie1.toString().toDouble()
+        loguj("Ileso2 spalono wszystkie $ileSpalonoWszystkie2")
+        var ileSpaloWszystkieInt = ((ileSpalonoWszystkie2 * 14.99) / 20)
+        loguj("Ileso3 spalono wszystkie $ileSpaloWszystkieInt")
+        ileSpaloWszystkieInt = ((ileSpaloWszystkieInt * 100.0).roundToInt() / 100.0)
+        loguj("Iles4 spalono wszystkie SUMA $ileSpaloWszystkieInt")
 
 
-
-//        var ileSpalonoTydzienInt =
-//            loguj("Iles spalono W tygodniu SUMA $ileSpalonoDzisiajInt") //Zaokrąlone do Doubla.
-
-        //println(random * 100.0) // 29533.499999999996
-        //    println((random * 100.0).roundToInt() / 100.0) // 295.33
-//        fun roundTheNumber(numInDouble: Double): String {
-//
-//            return "%.2f".format(numInDouble)
-//
-//        }
-
-        ileSpalonoDzisiaj.setText(ileSpalonoDzisiajInt.toString())
-        ileSpalonoTydzien.setText(ileSpaloTydzienInt.toString())
-        ileSpalonoMiesiac.setText(ileSpaloMiesiacInt.toString())
-        //ileSpalonoWszystkie.setText(ileSpalonoWszystkieInt.toString())
+        ileSpalonoDzisiaj.setText(ileSpalonoDzisiajInt.toString()+" zł")
+        ileSpalonoTydzien.setText(ileSpaloTydzienInt.toString()+" zł")
+        ileSpalonoMiesiac.setText(ileSpaloMiesiacInt.toString()+" zł")
+        ileSpalonoWszystkie.setText(ileSpaloWszystkieInt.toString()+" zł")
         btnSploneVisible()
     }
 
@@ -126,10 +123,7 @@ class Statystyki : AppCompatActivity() {
         var spaloneDzisiaj = "0"
         var spaloneDzisiaj1 = 0
         spaloneDzisiaj = operFiles.pobierzSpalone(spaloneDzisiaj)
-        //  loguj(" Ile tych spalonych z aktywniosci First: $spaloneDzisiaj")
         binding.statystykiTxtDzisiajInfo1.setText(spaloneDzisiaj)
-
-
         //oblicz ile tygodni
         //Zlapac pierwszy dzien tyogdnia???
         var dzienTygodnia = ""
@@ -175,12 +169,10 @@ class Statystyki : AppCompatActivity() {
         var zmiennaTep1 = 0
         var zmiennaTep2 = 0
         for (i in przesuniecieTygodnia downTo 1) {
-            // loguj("Spraewa numer i: $i")
+
             var dzienTemo = ""
             dzienTemo = operDate.pokazDateMinusPrzesuniecie(i)
-            // loguj("dzien to : $dzienTemo")
-//pobierz plik z nazwą dzienTemo+".txt"
-            //odbierz ostatnia licxzbe - ile splono wtedy
+
 
             zmiennaTep = operFiles.wczytajSploneZDatamiZPrzesuniecia(dzienTemo)
             // loguj("przesłana zmienna to: $zmiennaTep")
@@ -263,7 +255,7 @@ class Statystyki : AppCompatActivity() {
         //powrocic z info ile wsyszło
 
         for (i in 1..dzienWMiesiacu1 - 1) {
-            //dzienBiezacy = rokWMiesiacu1.toString() + "-" + miesiacWMiesiacu2 + "-" + dzienWMiesiacu2
+
             if (i < 10) {
                 var ii = "0" + i.toString()
                 dzienBiezacy = rokWMiesiacu1.toString() + "-" + miesiacWMiesiacu2 + "-" + ii
@@ -292,6 +284,17 @@ class Statystyki : AppCompatActivity() {
 
         //zinkrementowac po dacie i dodoawac po jednym dniu
         //*******************88
+
+        //Spalono wszystkie
+        //spaloneWszystkie = operFiles.pobierzSpalone(spaloneDzisiaj)
+
+        var spalonoWszystkie = 0
+
+        spalonoWszystkie = operFiles.pobierzSpalonoWszystkie(spalonoWszystkie)
+
+        loguj("Powrót spalono wszystkie: $spalonoWszystkie")
+        binding.statystykiTxtWszystkieInfo1.setText(spalonoWszystkie.toString())
+        //Spalono wszystkie: END
     }
 
     fun btnSploneVisible() {
