@@ -1,3 +1,5 @@
+@file:Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+
 package com.example.test4
 
 import android.util.Log
@@ -56,6 +58,7 @@ class OperFiles : AppCompatActivity() {
     }
 
     fun pobierzSpalonoWszystkie(spalonoWszystkie1: Int): Int {
+        loguj("pobierzSpalonoWszystkie z poprzedniego : $spalonoWszystkie1")
         var spalonoWszystkie = 32
 
         //wczytać date pierwszego użycia.
@@ -65,18 +68,40 @@ class OperFiles : AppCompatActivity() {
         //dodac do listy wszytskie
         //zsumowac wszytskie dane z listy
         //zrzucic do statystyki
-var dataPierwszegoWpisu =0
+        var dataPierwszegoWpisu = "0"
+
         listaSpalonychWszystkichTemp.clear()
         listaSpalonychWszystkich.clear()
-
+        var line35: String?
         try {//okreslic sciezke dostepu, plik pierwszy
+            loguj("Plik ustawienia to: $plikUstawienia")
+            if (plikUstawienia.exists()) {
+                BufferedReader(FileReader(plikUstawienia)).use { br ->
+                    while (br.readLine().also { line35 = it } != null) {
+                        loguj("Wczytana z sett.txt to: $line35")
+                        listaSpalonychWszystkichTemp.add(line35.toString())
+                    }
+                }
+            } else {
+                loguj("Pliku brak!!! $plikUstawienia")
+            }
 
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        loguj("Zczytuje liste tymczaoswoą settings")
+        for (listaSpalonychWszystkichTemps in listaSpalonychWszystkichTemp)
+            println(listaSpalonychWszystkichTemps) //wyswietl liste temp z pliku sett.txt
+        dataPierwszegoWpisu = listaSpalonychWszystkichTemp[4]
+        loguj("Data pierwszego wpisu to: $dataPierwszegoWpisu")
+
+// lecimy do pierwszego wpisu do wczoraj
+
+//dodoaj dzien nastepny
 
 
-       var spalonoWszystkie1 = spalonoWszystkie
+
+        var spalonoWszystkie1 = spalonoWszystkie
 
         return spalonoWszystkie1
     }
